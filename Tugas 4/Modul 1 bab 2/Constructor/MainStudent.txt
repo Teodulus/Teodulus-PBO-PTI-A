@@ -1,0 +1,32 @@
+//1. Lakukan percobaan constructor diatas dan benahi jika menemukan kesalahan!
+public class MainStudent {
+    public static void main(String[] args) {
+        Student anna = new Student();
+        anna.setName("Anna");
+        anna.setAddress("Malang");
+        anna.setAge(20);
+        anna.setMath(100);
+        anna.setScience(89);
+        anna.setEnglish(80);
+        anna.displayMessage();
+
+        System.out.println("===================");
+
+        Student chris = new Student("Chris", "Kediri", 21);
+        chris.setMath(70);
+        chris.setScience(60);
+        chris.setEnglish(90);
+        chris.displayMessage();
+
+        System.out.println("===================");
+
+        anna = new Student("Anna", "Batu", 18);
+        anna.displayMessage();
+
+        System.out.println("===================");
+
+        chris.setAddress("Surabaya");
+        chris.setAge(22);
+        chris.displayMessage();
+    }
+}

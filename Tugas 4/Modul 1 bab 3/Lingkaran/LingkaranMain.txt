@@ -1,0 +1,35 @@
+//1. Lakukan percobaan diatas dan benahi jika menemukan kesalahan!
+public class LingkaranMain {
+    public static void main(String[] args) {
+        Lingkaran l = new Lingkaran(3);
+        l.setTinggi(10);
+        l.displayMessage();
+
+        Lingkaran l2 = new Lingkaran(4, 10);
+        l2.displayMessage();
+    }
+}
+
+//2. Pada class lingkaran Tambahkan constructor dengan parameter int tinggi, apa yang terjadi dan jelaskan!
+public class LingkaranMain {
+    public static void main(String[] args) {
+        Lingkaran l = new Lingkaran(3);
+        l.setTinggi(10);
+        l.displayMessage();
+
+        Lingkaran l2 = new Lingkaran(4, 10);
+        l2.displayMessage();
+    }
+}
+
+// 3. Pada class lingkaran tambahkan constrctor dengan tipe data String alas dan String tinggi, kemudian tambahkan method untuk melakukan parsing atau perubahan tipe data dari String menjadi integer. Setelah itu pada method main lakukan instansiasi objek dengan nama objek Lstring dengan memanggil constructor bertipe data String. Jelaskan!
+public class LingkaranMain {
+    public static void main(String[] args) {
+        Lingkaran l = new Lingkaran(3);
+        l.setTinggi(10);
+        l.displayMessage();
+
+        Lingkaran l2 = new Lingkaran(4, 10);
+        l2.displayMessage();
+    }
+}
