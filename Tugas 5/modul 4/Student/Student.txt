@@ -1,0 +1,53 @@
+public class Student {
+    private String name;
+    private int mark;
+
+    public void setName(String n){
+        name = n;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setMark(int m){
+        mark = m;
+    }
+
+    public int getMark(){
+        return mark;
+    }
+}
+
+//2.Jika pada baris 6 s1.setName diubah menjadi s1.getName apa yang terjadi? jelaskan!
+Jika pada baris 6, s1.setName diubah menjadi s1.getName, maka akan terjadi kesalahan kompilasi. Hal ini disebabkan oleh perbedaan tipe data antara metode setName dan getName. Metode setName memiliki tipe data void, yang berarti metode tersebut tidak mengembalikan nilai, sedangkan metode getName memiliki tipe data String, yang berarti metode tersebut mengembalikan nilai bertipe String.
+
+//3. Setelah diperbaiki, ubahlah hak akses pada baris 4 (pada class Student) menjadi private apa yang terjadi jika class Test dijalankan? Jelaskan!
+Jika hak akses pada baris 4 (pada class Student) diubah menjadi private, maka variabel name dan mark hanya akan dapat diakses di dalam kelas Student itu sendiri. Ini berarti bahwa kelas lain, termasuk kelas Test, tidak akan dapat mengakses langsung variabel name dan mark dari luar kelas Student.
+public class Student {
+    private String name; 
+    private int mark;    
+
+    public void setName(String n){
+        name = n;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setMark(int m){
+        mark = m;
+    }
+
+    public int getMark(){
+        return mark;
+    }
+}
+
+//4. Jika kedua kelas diatas terdapat dalam package yang sama apakah konsep enkapsulasi tetap berfungsi? jelaskan!
+Konsep enkapsulasi  berfungsi meskipun kedua kelas berada dalam paket yang sama. Enkapsulasi adalah konsep  pemrograman berorientasi objek yang mengelola akses ke data di dalam  objek.
+Dengan menerapkan enkapsulasi, Kita dapat memastikan bahwa data hanya dapat diakses dan dimodifikasi melalui metode yang ditentukan dan tidak langsung dari luar kelas.
+Pengubah akses  seperti private, protected, dan public tetap berlaku meskipun kelas berada dalam paket yang sama. Dalam hal ini, jika variabel nama dan tag dideklarasikan  private pada kelas Student, maka variabel tersebut hanya dapat diakses  langsung dari  kelas tersebut.
+Kelas-kelas lain dalam paket yang sama tidak dapat mengakses variabel-variabel ini secara langsung  dan harus menggunakan metode akses yang disediakan (pengambil dan penyetel).
+

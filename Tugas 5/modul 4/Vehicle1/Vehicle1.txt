@@ -1,0 +1,166 @@
+//1. Method apakah yang menjadi accessor (getter) ?
+Accessor (getter) adalah metode yang digunakan untuk mengakses nilai dari suatu atribut atau properti dari suatu objek. 
+Ada dua metode yang merupakan accessor (getter), yaitu:
+1. public double getLoad()
+2. public double getMaxLoad()
+(digunakan untuk mengakses informasi tentang beban saat ini dan beban maksimum dari kendaraan.)
+
+public class Vehicle1 {
+    private double load, maxLoad;
+
+    public Vehicle1(double max) {
+        this.maxLoad = max;
+    }
+
+    public double getLoad() {
+        return this.load;
+    }
+
+    public double getMaxLoad() {
+        return this.maxLoad;
+    }
+
+    public boolean addBox(double weight) {
+        double temp = this.load + weight;
+        if (temp <= maxLoad) {
+            this.load = this.load + weight;
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+
+
+//2. Tambahkan source code berikut dibawah baris ke 6 pada class TestVehicle1.
+System.out.println("Add load(100kg) : " + (vehicle.load=500));
+Jalankan program, apakah output dari program tersebut?
+Kembalikan program seperti semula.
+
+public class Vehicle1 {
+    private double load, maxLoad;
+
+    public Vehicle1(double max) {
+        this.maxLoad = max;
+    }
+
+    public double getLoad() {
+        return this.load;
+    }
+
+    public double getMaxLoad() {
+        return this.maxLoad;
+    }
+
+    public boolean addBox(double weight) {
+        double temp = this.load + weight;
+        if (temp <= maxLoad) {
+            this.load = this.load + weight;
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+//3. Ubahlah tipe data pada atribut load dan maxload pada class Vehicle1 menjadi public.
+Jalankan program, apakah output dari program tersebut?
+a. Tambahkan source kode berikut dibawah baris ke 6 pada class TestVehicle1.
+System.out.println("Add load(100kg) : " + (vehicle.load=500));
+Jalankan program, apakah output dari program tersebut?
+Kembalikan program seperti semula.
+b. Tambahkan source kode berikut dibawah baris ke 12 pada class TestVehicle1.
+System.out.println("Add load(100kg) : " + (vehicle.load=500));
+Jalankan program, apakah output dari program tersebut?
+Kembalikan program seperti semula
+
+Dengan deklarasi public, kedua atribut tersebut dapat diakses dan dimodifikasi langsung dari luar kelas Vehicle1, sedangkan dengan deklarasi private, kedua atribut tersebut hanya dapat diakses dan dimodifikasi di dalam kelas Vehicle1.
+
+public class Vehicle1 {
+    public double load, maxLoad;
+
+    public Vehicle1(double max) {
+        this.maxLoad = max;
+    }
+
+    public double getLoad() {
+        return this.load;
+    }
+
+    public double getMaxLoad() {
+        return this.maxLoad;
+    }
+
+    public boolean addBox(double weight) {
+        double temp = this.load + weight;
+        if (temp <= maxLoad) {
+            this.load = this.load + weight;
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+//4. Ulangi instruksi pada nomer 4 dengan mengubah tipe data pada atribut load dan maxload
+pada class Vehicle1 menjadi protected.
+
+public class Vehicle1 {
+    protected double load, maxLoad;
+
+    public Vehicle1(double max) {
+        this.maxLoad = max;
+    }
+
+    public double getLoad() {
+        return this.load;
+    }
+
+    public double getMaxLoad() {
+        return this.maxLoad;
+    }
+
+    public boolean addBox(double weight) {
+        double temp = this.load + weight;
+        if (temp <= maxLoad) {
+            this.load = this.load + weight;
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+Kelas Vehicle1 merupakan representasi dari kendaraan dengan atribut load (total beban) dan maxLoad (batas maksimum beban). Konstruktor Vehicle1(double max) digunakan untuk menginisialisasi batas maksimum beban. Metode getLoad() dan getMaxLoad() digunakan untuk mengakses nilai load dan maxLoad, sedangkan metode addBox(double weight) untuk menambahkan beban ke kendaraan jika total beban setelah penambahan tidak melebihi batas maksimum.
+
+//5. Ulangi instruksi pada nomer 4 dengan mengubah tipe data pada atribut load dan maxload
+pada class Vehicle1 menjadi default.
+
+class Vehicle1 {
+    double load, maxLoad;
+
+    public Vehicle1(double max) {
+        this.maxLoad = max;
+    }
+
+    public double getLoad() {
+        return this.load;
+    }
+
+    public double getMaxLoad() {
+        return this.maxLoad;
+    }
+
+    public boolean addBox(double weight) {
+        double temp = this.load + weight;
+        if (temp <= maxLoad) {
+            this.load = this.load + weight;
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+Dengan perubahan ini, atribut load dan maxLoad hanya dapat diakses oleh kelas yang berada dalam paket yang sama dengan kelas Vehicle1. Jika kelas TestVehicle1 berada dalam paket yang berbeda, tidak akan dapat mengakses atribut load dan maxLoad secara langsung.
