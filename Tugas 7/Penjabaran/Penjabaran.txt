@@ -1,0 +1,405 @@
+1. Jalankan Main.java untuk polymorfisme Employee, analisis dan jelaskan keluaran
+program tersebut
+sebenarnya bisa di jalankan tapi hanya di area main saja
+
+2. Analisis dan jelaskan output program (berdasarkan konsep polimorfisme)!
+Setiap objek karyawan dicetak secara terpisah dengan informasi tentang nama, nomor KTP, dan pendapatannya.
+Masing-masing pendapatan dihitung berdasarkan logika bisnis dari kelas masing-masing.
+Objek-objek karyawan dimasukkan ke dalam array `Employee`, menunjukkan penggunaan polimorfisme.
+Jika karyawan adalah BasePlusCommissionEmployee, gaji pokoknya dinaikkan 10% dan pendapatannya dihitung kembali, menunjukkan penggunaan polimorfisme untuk memanggil metode yang sesuai dengan jenis objek yang sebenarnya, meskipun disimpan dalam array Employee.
+program mencetak tipe dari setiap objek dalam array menggunakan getClass().getName().
+
+
+3. Buat objek dari method Employee? Jelaskan hasil dari output program tersebut!
+
+public abstract class Employee {
+    private String name;
+    private String noKTP;
+
+    public Employee(String name, String noKTP) {
+        this.name = name;
+        this.noKTP = noKTP;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNoKTP() {
+        return noKTP;
+    }
+
+    public abstract double earnings();
+
+    @Override
+    public String toString() {
+        return String.format("Name: %s\nNo. KTP: %s", getName(), getNoKTP());
+    }
+    
+    public static Employee createEmployee(String type, String name, String noKTP, double salaryOrRate, double additionalParameter) {
+        switch(type.toLowerCase()) {
+            case "salaried":
+                return new SalariedEmployee(name, noKTP, salaryOrRate);
+            case "hourly":
+                return new HourlyEmployee(name, noKTP, salaryOrRate, additionalParameter);
+            case "commission":
+                return new CommissionEmployee(name, noKTP, salaryOrRate, additionalParameter);
+            case "basepluscommission":
+                return new BasePlusCommissionEmployee(name, noKTP, salaryOrRate, additionalParameter, additionalParameter);
+            default:
+                return null;
+        }
+    }
+}
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        Employee salariedEmployee = Employee.createEmployee("salaried", "Daniel", "135", 800.00, 0);
+        Employee hourlyEmployee = Employee.createEmployee("hourly", "Karina", "234", 16.75, 40);
+        Employee commissionEmployee = Employee.createEmployee("commission", "Keanu", "145", 10000, 0.06);
+        Employee basePlusCommissionEmployee = Employee.createEmployee("basepluscommission", "Bondan", "234", 5000, 300);
+
+        System.out.println("Employees diproses secara terpisah:\n");
+
+        System.out.printf("%s\n%s: $%,.2f\n\n", salariedEmployee, "Earnings", salariedEmployee.earnings());
+        System.out.printf("%s\n%s: $%,.2f\n\n", hourlyEmployee, "Earnings", hourlyEmployee.earnings());
+        System.out.printf("%s\n%s: $%,.2f\n\n", commissionEmployee, "Earnings", commissionEmployee.earnings());
+        System.out.printf("%s\n%s: $%,.2f\n\n", basePlusCommissionEmployee, "Earnings", basePlusCommissionEmployee.earnings());
+
+        Employee[] employees = new Employee[4];
+        employees[0] = salariedEmployee;
+        employees[1] = hourlyEmployee;
+        employees[2] = commissionEmployee;
+        employees[3] = basePlusCommissionEmployee;
+
+        System.out.println("Employees diproses secara polimorfisme:\n");
+
+        for (Employee currentEmployee : employees) {
+            System.out.println(currentEmployee);
+            System.out.printf("Earnings: $%,.2f\n", currentEmployee.earnings());
+
+            if (currentEmployee instanceof BasePlusCommissionEmployee) {
+                BasePlusCommissionEmployee employee = (BasePlusCommissionEmployee) currentEmployee;
+                employee.setBaseSalary(1.10 * employee.getBaseSalary());
+                System.out.printf("Gaji pokok setelah dinaikkan 10%% : $%,.2f\n", employee.getBaseSalary());
+                System.out.printf("Pendapatan setelah dinaikkan: $%,.2f\n\n", currentEmployee.earnings());
+            }
+        }
+
+        for (int j = 0; j < employees.length; j++) {
+            System.out.printf("Employee %d = %s\n", j, employees[j].getClass().getName());
+        }
+    }
+}
+
+
+Terdapat usaha untuk membuat objek dari kelas abstrak Employee melalui pemanggilan konstruktor Employee() dalam method main() dari kelas Main. Namun, hal ini tidak mungkin dilakukan karena kelas Employee adalah kelas abstrak yang tidak dapat diinstansiasi.
+
+ jika Anda menjalankan program dengan baris kode tersebut, itu akan menghasilkan kesalahan kompilasi yang menyatakan bahwa Anda tidak dapat membuat objek dari kelas abstrak.
+
+Hasilnya, jika baris kode di atas diganti dengan pembuatan objek dari salah satu kelas turunan, misalnya SalariedEmployee, maka program akan berjalan tanpa kesalahan dan mencetak output sesuai dengan logika yang diimplementasikan dalam kelas turunan tersebut.
+
+
+4. Tambahkan atribut tanggal lahir di Kelas Employee, serta tambahkan method
+pendukungnya (accesor dan mutator). Modifikasi program agar sesuai. Asumsikan gaji
+yang diterima adalah per bulan, buat kelas uji untuk menguji program yang sudah anda
+modifikasi, kemudian buat objek dari semua class (salariedEmployee, hourlyEmployee,
+commissionEmployee, basePlusCommissionEmployee dan hitung gajinya secara
+polimorfisme, serta tambahkan gajinya sebesar 100.000 jika bulan ini adalah bulan ulang
+tahunnya.
+
+import java.time.LocalDate;
+
+public abstract class Employee {
+    private String name;
+    private String noKTP;
+    private LocalDate birthDate;
+
+    public Employee(String name, String noKTP, LocalDate birthDate) {
+        this.name = name;
+        this.noKTP = noKTP;
+        this.birthDate = birthDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNoKTP() {
+        return noKTP;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public abstract double earnings();
+
+    @Override
+    public String toString() {
+        return String.format("Name: %s\nNo. KTP: %s\nBirth Date: %s", getName(), getNoKTP(), getBirthDate());
+    }
+    
+    public int getAge() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getYear() - birthDate.getYear();
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+    
+
+    public void addSalaryIfBirthday(double amount) {
+        LocalDate currentDate = LocalDate.now();
+        if (currentDate.getMonth() == birthDate.getMonth()) {
+            // Tambahkan gaji
+            System.out.println("Happy Birthday! Adding bonus to salary.");
+            amount += 100000;
+        }
+        System.out.printf("Earnings: $%,.2f\n", amount);
+    }
+}
+
+
+import java.time.LocalDate;
+
+public class Main {
+    public static void main(String[] args) {
+        LocalDate birthDate1 = LocalDate.of(1990, 5, 15); // Contoh tanggal lahir
+        Employee salariedEmployee = Employee.createEmployee("salaried", "Daniel", "135", birthDate1, 800.00, 0);
+
+        LocalDate birthDate2 = LocalDate.of(1995, 8, 20); // Contoh tanggal lahir
+        Employee hourlyEmployee = Employee.createEmployee("hourly", "Karina", "234", birthDate2, 16.75, 40);
+
+        LocalDate birthDate3 = LocalDate.of(1988, 10, 25); // Contoh tanggal lahir
+        Employee commissionEmployee = Employee.createEmployee("commission", "Keanu", "145", birthDate3, 10000, 0.06);
+
+        LocalDate birthDate4 = LocalDate.of(1992, 3, 5); // Contoh tanggal lahir
+        Employee basePlusCommissionEmployee = Employee.createEmployee("basepluscommission", "Bondan", "234", birthDate4, 5000, 300);
+
+        System.out.println("Employees diproses secara terpisah:\n");
+
+        System.out.printf("%s\n%s: $%,.2f\n\n", salariedEmployee, "Earnings", salariedEmployee.earnings());
+        System.out.printf("%s\n%s: $%,.2f\n\n", hourlyEmployee, "Earnings", hourlyEmployee.earnings());
+        System.out.printf("%s\n%s: $%,.2f\n\n", commissionEmployee, "Earnings", commissionEmployee.earnings());
+        System.out.printf("%s\n%s: $%,.2f\n\n", basePlusCommissionEmployee, "Earnings", basePlusCommissionEmployee.earnings());
+
+        Employee[] employees = {salariedEmployee, hourlyEmployee, commissionEmployee, basePlusCommissionEmployee};
+
+        System.out.println("Employees diproses secara polimorfisme:\n");
+
+        int currentMonth = LocalDate.now().getMonthValue(); // Bulan saat ini
+
+        for (Employee currentEmployee : employees) {
+            System.out.println(currentEmployee);
+            double earnings = currentEmployee.earnings();
+            System.out.printf("Earnings: $%,.2f\n", earnings);
+
+            if (currentEmployee instanceof BasePlusCommissionEmployee) {
+                BasePlusCommissionEmployee employee = (BasePlusCommissionEmployee) currentEmployee;
+                double newBaseSalary = 1.10 * employee.getBaseSalary();
+                employee.setBaseSalary(newBaseSalary);
+                double newEarnings = employee.earnings();
+                System.out.printf("Gaji pokok setelah dinaikkan 10%% : $%,.2f\n", newBaseSalary);
+                System.out.printf("Pendapatan setelah dinaikkan: $%,.2f\n\n", newEarnings);
+            } else {
+                System.out.println();
+            }
+        }
+
+        for (int j = 0; j < employees.length; j++) {
+            System.out.printf("Employee %d = %s\n", j, employees[j].getClass().getName());
+        }
+    }
+}
+
+
+import java.time.LocalDate;
+
+public class SalariedEmployee extends Employee {
+    private double weeklySalary; //gaji/minggu
+
+    public SalariedEmployee(String name, String noKTP, LocalDate birthDate, double salary) {
+        super(name, noKTP, birthDate);
+        setWeeklySalary(salary);
+    }
+
+    public void setWeeklySalary(double salary) {
+        weeklySalary = salary;
+    }
+
+    public double getWeeklySalary() {
+        return weeklySalary;
+    }
+
+    @Override
+    public double earnings() {
+        return getWeeklySalary();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Salaried employee:\n%s\nWeekly salary: %.2f", super.toString(), getWeeklySalary());
+    }
+}
+
+
+import java.time.LocalDate;
+
+public class HourlyEmployee extends Employee {
+    private double wage;
+    private double hours;
+
+    public HourlyEmployee(String name, String noKTP, LocalDate birthDate, double hourlyWage, double hoursWorked) {
+        super(name, noKTP, birthDate);
+        setWage(hourlyWage);
+        setHours(hoursWorked);
+    }
+
+    public void setWage(double hourlyWage) {
+        wage = hourlyWage;
+    }
+
+    public double getWage() {
+        return wage;
+    }
+
+    public void setHours(double hoursWorked) {
+        hours = hoursWorked;
+    }
+
+    public double getHours() {
+        return hours;
+    }
+
+    @Override
+    public double earnings() {
+        if (getHours() <= 40)
+            return getWage() * getHours();
+        else
+            return 40 * getWage() + (getHours() - 40) * getWage() * 1.5;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Hourly employee:\n%s\nHourly wage: %.2f\nHours worked: %.2f", super.toString(), getWage(), getHours());
+    }
+}
+
+import java.time.LocalDate;
+
+public class CommissionEmployee extends Employee {
+    private double grossSales;
+    private double commissionRate;
+
+    public CommissionEmployee(String name, String noKTP, LocalDate birthDate, double sales, double rate) {
+        super(name, noKTP, birthDate);
+        setGrossSales(sales);
+        setCommissionRate(rate);
+    }
+
+    public void setGrossSales(double sales) {
+        grossSales = sales;
+    }
+
+    public double getGrossSales() {
+        return grossSales;
+    }
+
+    public void setCommissionRate(double rate) {
+        commissionRate = rate;
+    }
+
+    public double getCommissionRate() {
+        return commissionRate;
+    }
+
+    @Override
+    public double earnings() {
+        return getCommissionRate() * getGrossSales();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Commission employee:\n%s\nGross sales: %.2f\nCommission rate: %.2f", super.toString(), getGrossSales(), getCommissionRate());
+    }
+}
+
+import java.time.LocalDate;
+
+public class BasePlusCommissionEmployee extends CommissionEmployee {
+    private double baseSalary;
+
+    public BasePlusCommissionEmployee(String name, String noKTP, LocalDate birthDate, double sales, double rate, double salary) {
+        super(name, noKTP, birthDate, sales, rate);
+        setBaseSalary(salary);
+    }
+
+    public void setBaseSalary(double salary) {
+        baseSalary = salary;
+    }
+
+    public double getBaseSalary() {
+        return baseSalary;
+    }
+
+    @Override
+    public double earnings() {
+        return getBaseSalary() + super.earnings();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Base-Salaried\n%s\nBase salary: %.2f", super.toString(), getBaseSalary());
+    }
+}
+
+
+adanya semua penyesuaian dimana penyesuaian itu di bagian tanggal dan penambahan import java.time.LocalDate; agar akurat
+ 
+5.   Perusahaan yang mengaplikasikan program polimorfisme diatas ingin menambahkan
+kriteria baru untuk penggajian karyawannya, yaitu penggajian berdasarkan banyaknya
+barang yang diproduksi. Dengan ketentuan gaji karyawan tersebut adalah
+import java.time.LocalDate;
+
+public class ProductionEmployee extends Employee {
+    private int producedItems;
+    private double wagePerItem;
+
+    public ProductionEmployee(String name, String noKTP, LocalDate birthDate, int producedItems, double wagePerItem) {
+        super(name, noKTP, birthDate);
+        this.producedItems = producedItems;
+        this.wagePerItem = wagePerItem;
+    }
+
+    public int getProducedItems() {
+        return producedItems;
+    }
+
+    public void setProducedItems(int producedItems) {
+        this.producedItems = producedItems;
+    }
+
+    public double getWagePerItem() {
+        return wagePerItem;
+    }
+
+    public void setWagePerItem(double wagePerItem) {
+        this.wagePerItem = wagePerItem;
+    }
+
+    @Override
+    public double earnings() {
+        return producedItems * wagePerItem;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Production employee:\n%s\nProduced items: %d\nWage per item: %.2f", super.toString(), producedItems, wagePerItem);
+    }
+}
+
+Peningkatan program mencakup pengenalan fitur baru dalam penggajian karyawan, yang didasarkan pada jumlah barang yang diproduksi. Perubahan program melibatkan penciptaan kelas tambahan yang disebut ProductionEmployee, yang merupakan subkelas dari Employee. Setiap instansi ProductionEmployee dilengkapi dengan variabel untuk menyimpan jumlah barang yang diproduksi mingguan dan tarif upah per barang. Metode earnings() disesuaikan agar dapat menghitung pendapatan berdasarkan jumlah barang yang diproduksi, sementara metode toString() didesain untuk memberikan deskripsi yang sesuai dari objek ProductionEmployee.
