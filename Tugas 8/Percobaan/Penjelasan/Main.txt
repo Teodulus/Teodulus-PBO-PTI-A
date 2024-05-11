@@ -1,0 +1,58 @@
+// Main.java
+
+3.
+public class Main {
+    public static void main(String[] args) {
+        // Object dengan class HeroIntel
+        HeroIntel hero1 = new HeroIntel("Ucup", 100);
+        hero1.display();
+
+        // Upcasting
+        Hero heroUp = (Hero) hero1;
+        heroUp.display();
+
+        // Object dengan class Hero
+        Hero heroReg = new Hero("Boy", 100);
+        heroReg.display();
+
+        // Downcasting
+        HeroIntel hero2 = (HeroIntel) heroUp;
+        hero2.display(); // ini berhasil downcasting
+
+        // Additional code
+        HeroAgility hero3 = (HeroAgility) heroUp;
+        hero3.display();
+    }
+}
+
+4. 
+public class Main {
+    public static void main(String[] args) {
+        HeroIntel hero1 = new HeroIntel("Ucup", 100);
+        System.out.println(hero1.type); // Mencoba mengakses atribut type dari objek HeroIntel
+        
+        HeroAgility hero2 = new HeroAgility("Boy", 100);
+        System.out.println(hero2.type); // Mencoba mengakses atribut type dari objek HeroAgility
+    }
+}
+
+5. 
+public class Main {
+    public static void main(String[] args) {
+        // Upcasting dari HeroMagic ke Hero
+        HeroMagic heroMagic = new HeroMagic("Merlin", 150);
+        Hero heroUp = heroMagic;
+
+        // Downcasting dari Hero ke HeroMagic
+        HeroMagic heroMagicDown = (HeroMagic) heroUp;
+
+        // Memanggil metode display dari HeroMagic
+        heroMagicDown.display();
+        
+        // Memanggil metode dari kelas Hero
+        System.out.println("Name: " + heroMagicDown.getName());
+        System.out.println("Health: " + heroMagicDown.getHealth());
+        System.out.println("Power: " + heroMagicDown.getPower());
+    }
+}
+

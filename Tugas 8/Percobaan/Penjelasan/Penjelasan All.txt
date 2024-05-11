@@ -1,0 +1,28 @@
+1. Jelaskan apa fungsi dari extends dan super pada kode subclass?
+extends memungkinkan untuk membuat subclass yang memiliki semua karakteristik dari superclassnya. Misalnya, jika kita memiliki kelas Hero yang memiliki atribut name dan health, kita dapat membuat subclass seperti HeroIntel dan HeroAgility yang mewarisi atribut dan metode dari kelas Hero. Ini berarti kedua subclass tersebut memiliki atribut name dan health, dan juga metode seperti display(), yang telah didefinisikan di kelas Hero.
+Super berperan penting dalam memanggil metode atau konstruktor dari superclass di dalam subclass. Misalnya, saat kita ingin menginisialisasi objek dalam konstruktor subclass, kita dapat menggunakan super() untuk memanggil konstruktor superclass dan melakukan inisialisasi atribut superclass sebelum melakukan inisialisasi kelas subclass.
+
+2. Untuk apa digunakan keyword this pada constructor, setter dan getter?
+Pada Constructor this membantu membedakan antara parameter konstruktor dengan variabel instance kelas tersebut. Ini berguna saat kita ingin menginisialisasi variabel instance dengan nilai dari parameter yang memiliki nama yang sama. Misalnya, ketika kita ingin mengatur nilai name dari objek saat ini dengan nilai parameter name, kita menggunakan this.name = name;.
+Dalam setter, this digunakan untuk mengatur nilai variabel instance dari kelas. Ini membantu dalam menghindari konflik dengan parameter setter yang mungkin memiliki nama yang sama dengan variabel instance. Contohnya, dengan menggunakan this.name = name; dalam setter setName(String name), kita mengatur nilai variabel instance name dengan nilai dari parameter name.
+Meskipun kurang umum, this juga dapat digunakan dalam getter. Ini membantu dalam klarifikasi bahwa yang dimaksud adalah variabel instance, terutama jika ada nama parameter yang sama dengan variabel instance. Contoh penggunaannya adalah return this.name; dalam getter getName(), yang mengembalikan nilai dari variabel instance name.
+
+3.Tambahkan dan jalankan kode ini di kelas Main, lalu amati apa yang terjadi?
+Pada baris HeroAgility hero3 = (HeroAgility) heroUp;, kita mencoba melakukan downcasting objek heroUp menjadi objek HeroAgility. Namun, heroUp sebelumnya di-upcast dari objek HeroIntel. Karena HeroAgility bukanlah subclass dari HeroIntel, downcasting ini akan menghasilkan error saat runtime. Ini disebabkan karena tidak mungkin untuk mengubah objek dari satu tipe ke tipe yang tidak terkait melalui downcasting.
+
+4. Ubahlah modifier atribut type pada class HeroIntel dan HeroAgility menjadi public, lalu coba akses
+langsung melalui class Main. Apakah atribut bisa diakses langsung atau tidak, jelaskan!
+mengubah modifier atribut menjadi public, kita memungkinkan akses langsung ke atribut tersebut dari luar kelas, yang dapat mempengaruhi tingkat encapsulation dan menyebabkan masalah jika atribut tersebut dimodifikasi secara tidak semestinya.
+
+5. Buatlah class baru HeroMagic dengan atribut tambahan power = “Magic” serta extends semua atribut dan method dari class Hero. Kemudian coba buatlah kode untuk upcasting dan downcasting dari class HeroMagic ke Hero pada class Main!
+HeroMagic
+HeroMagic adalah subclass dari Hero.
+Kita menambahkan atribut power yang mewakili jenis kekuatan hero, dengan nilai default "Magic".
+Konstruktor HeroMagic menerima parameter name dan health, dan menginisialisasi atribut power dengan "Magic" menggunakan konstruktor superclass.
+Metode getPower() digunakan untuk mengembalikan nilai atribut power.
+Metode display() dioverride dari superclass Hero untuk menambahkan informasi tentang jenis kekuatan hero.
+Main
+Selanjutnya, kita melakukan downcasting dari Hero ke HeroMagic dengan (HeroMagic) heroUp.
+Kita memanggil metode display() dari objek heroMagicDown, yang sebenarnya adalah objek HeroMagic.
+Kita juga memanggil metode dari superclass Hero seperti getName() dan getHealth().
+Terakhir, kita memanggil metode khusus dari HeroMagic, yaitu getPower().
